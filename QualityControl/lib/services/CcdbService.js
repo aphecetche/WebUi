@@ -183,10 +183,13 @@ class CcdbService {
     const reqHeaders = {Accept: 'application/json'};
 
     const {status, headers} = await httpHeadJson(this.hostname, this.port, path, reqHeaders);
-    if (status >= 200 && status <= 299) {
-      const location = headers[this.CONTENT_LOCATION]
+    console.log("status=",status)
+    console.log("headers=",headers)
+    if (status==303 ||(status >= 200 && status <= 299)) {
+      const location = headers[this.LOCATION]
         .split(', ')
         .filter((location) => !location.startsWith('alien'))[0];
+      console.log("TOTO location",location)
       if (!location) {
         throw new Error(`No location provided by CCDB for object with path: ${path}`)
       }

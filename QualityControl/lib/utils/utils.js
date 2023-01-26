@@ -83,6 +83,7 @@ function httpGetJson(hostname, port, path, headers = {Accept: 'application/json'
  */
 function httpHeadJson(hostname, port, path, headers = {Accept: 'application/json'}) {
   const requestOptions = {hostname, port, path, method: 'HEAD', headers};
+  console.log("requestOptions=",requestOptions)
   return new Promise((resolve, reject) => {
     http.request(requestOptions, (res) => resolve({status: res.statusCode, headers: res.headers}))
       .on('error', (err) => reject(err))
