@@ -183,8 +183,8 @@ export class CcdbService {
     const reqHeaders = { Accept: 'application/json' };
 
     const { status, headers } = await httpHeadJson(this.hostname, this.port, path, reqHeaders);
-    if (status >= 200 && status <= 299) {
-      const location = headers[this.CONTENT_LOCATION]
+    if ((status == 303) || (status >= 200 && status <= 299)) {
+      const location = headers[this.LOCATION]
         .split(', ')
         .filter((location) => !location.startsWith('alien'))[0];
       if (!location) {
